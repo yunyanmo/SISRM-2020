@@ -1,0 +1,181 @@
+---
+title: "Volume 1"
+author: "Yunyan Mo"
+date: "`r lubridate::today()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, error=TRUE)
+library(tidyverse)
+library(rvest)
+```
+
+
+## Creating a function to get the treaty dataframe from the site
+```{r function}
+
+## x is the url
+get_treaty <- function(x) {
+  ## Read url
+  treaty <- read_html(x)
+  ## Extract desired information using html nodes
+  nodes <- html_nodes(treaty, 'tr:nth-child(14) td , tr:nth-child(14) th , tr:nth-child(13) th , tr:nth-child(12) th+ td , tr:nth-child(13) td , tr:nth-child(12) th , tr:nth-child(11) td , tr:nth-child(11) th , tr:nth-child(6) td , tr:nth-child(6) th , tr:nth-child(3) th+ td , tr:nth-child(3) th , tr:nth-child(2) th+ td , tr:nth-child(2) th , .wdt-160+ td , .wdt-160')
+  ## Convert html into plain text
+  text <- html_text(nodes)
+  ## Cleaning the text by removing white spaces
+  text <- trimws(text, whitespace = "[ \t\r\n]")
+  text <- gsub("\\s+"," ", text)
+  ## Convert text into a dataframe
+  df_text <- data.frame(matrix(text, ncol = 2, byrow = T), stringsAsFactors = FALSE)
+  ## Switch rows and columns to standardize the dataframe
+  df_text2 <- data.frame(t(df_text))
+  ## The transpose function t() created factor columns, we need to use the mutate function to turn term back to character columns
+  df_text2 <- df_text2 %>%
+    mutate_all(type.convert) %>%
+    mutate_if(is.factor, as.character)  
+  ## The column names right now are assigned variables instead of what we wanted, so we need to skip the first line to allow the 
+  names(df_text2) <- df_text2 %>% 
+    slice(1) %>% 
+    unlist()
+  df_text2 <- df_text2 %>% 
+    slice(-1)
+  ## Manipulate initial dataframe to separate the EIF and registration dates into year, month, and day
+  df_final <- df_text2 %>%
+    mutate(`Registration Date` = lubridate::dmy(`Registration Date`), 
+           `EIF Date` = lubridate::dmy(`EIF information`)) %>%
+    mutate(`Registration Year` = lubridate::year(`Registration Date`),
+          `Registration Month` = lubridate::month(`Registration Date`),
+          `Registration Day` = lubridate::day(`Registration Date`),
+          `EIF Year` = lubridate::year(`EIF Date`),
+          `EIF Month` = lubridate::month(`EIF Date`),
+          `EIF Day` = lubridate::day(`EIF Date`))
+  ## Incorporating the second function that was made to handle the few treaties that are formatted a little differently than the others
+  if (df_final$`Participant(s)`=="") {
+  df_final <- get_treaty2(x)
+  }
+  
+return(df_final)
+  
+}
+
+```
+
+
+## Run it for all the treaty sites in volume 1
+```{r iteration}
+  
+## Combine all the treaty links in volume 1 to a vector.
+volume1 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804553d8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660be&clang=_en", "https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280166099&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660ac&clang=_en", 
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660a3&clang=_en", 
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804ba155&clang=_en", 
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804ba26a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280048290&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028004830f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280166076&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660c9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660dd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800482ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800482f9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028004831b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280048304&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804ba134&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280048328&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800482d1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800482ba&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800482a7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028004830f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280048290&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804ba26a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804ba155&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660a3&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660ac&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280166099&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801660be&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002804553d8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800482e2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028002c211&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028004528d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800452da&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028002c211&clang=_en")
+
+
+## An empty vector that is the same length of the vector above. Used to store the results of the for loop function below.
+t_data <- vector("list", length(volume1)) 
+
+## Running the get_treaty() function for all of volume 1.
+for (i in seq_along(volume1)){
+  t_data[[i]] <- get_treaty(volume1[[i]])
+}
+
+
+##
+for (i in seq_along(t_data)){
+ colnames(t_data[[i]])[colnames(t_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume1_combine <- bind_rows(t_data)
+
+
+write.csv(volume1_combine, "Volume 1.csv", row.names = FALSE)
+
+
+```
+
+
+```{r function 2}
+## Make this into another function
+get_treaty2 <- function (x) {
+  treaty <- read_html(x)
+  nodes1 <- html_nodes(treaty, '#headerbox tr:nth-child(14) td , tr:nth-child(14) th , tr:nth-child(13) th , #headerbox tr:nth-child(12) th+ td , #headerbox tr:nth-child(13) td , tr:nth-child(12) th , #headerbox tr:nth-child(11) td , tr:nth-child(11) th , #headerbox tr:nth-child(6) td , tr:nth-child(6) th , #headerbox tr:nth-child(3) th+ td , tr:nth-child(3) th , #headerbox tr:nth-child(2) th+ td , tr:nth-child(2) th , #headerbox .wdt-160+ td , .wdt-160')
+  text1 <- html_text(nodes1)
+  text1 <- trimws(text1, whitespace = "[ \t\r\n]")
+  text1 <- gsub("\\s+"," ", text1)
+  df_text1 <- data.frame(matrix(text1, ncol = 2, byrow = T), stringsAsFactors = FALSE)
+  df_trans <- data.frame(t(df_text1))
+  df_trans <- df_trans %>%
+    mutate_all(type.convert) %>%
+    mutate_if(is.factor, as.character)  
+  names(df_trans) <- df_trans %>% 
+    slice(1) %>% 
+    unlist()
+  df_trans <- df_trans %>% 
+    slice(-1)
+ df_f <- df_trans %>%
+    mutate(`Registration Date` = lubridate::dmy(`Registration Date`), 
+           `EIF Date` = lubridate::dmy(`EIF information`)) %>%
+    mutate(`Registration Year` = lubridate::year(`Registration Date`),
+          `Registration Month` = lubridate::month(`Registration Date`),
+          `Registration Day` = lubridate::day(`Registration Date`)) 
+  if(is.na(df_f$`EIF Date`)){
+  df_f <- df_f%>%
+   mutate(`EIF Date` = gsub(",.*", "", `EIF information`)) %>%
+   mutate(`EIF Date` = lubridate::dmy(`EIF Date`)) %>%
+    mutate( `EIF Year` = lubridate::year(`EIF Date`),
+          `EIF Month` = lubridate::month(`EIF Date`),
+          `EIF Day` = lubridate::day(`EIF Date`))
+} else {
+  df_f <- df_f %>%
+    mutate( `EIF Year` = lubridate::year(`EIF Date`),
+          `EIF Month` = lubridate::month(`EIF Date`),
+          `EIF Day` = lubridate::day(`EIF Date`))
+}
+  nodes2 <- html_nodes(treaty, '#dgActions a')
+  text2 <- html_text(nodes2)
+  text2 <- paste(unlist(text2), collapse = ", ")
+  text2 <- c(text2)
+  df_f[["Participant(s)"]] <- text2
+  
+  return(df_f)
+}
+
+
+```
+
+## Session info
+
+```{r}
+devtools::session_info()
+```
