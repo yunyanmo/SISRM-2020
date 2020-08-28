@@ -1,0 +1,1150 @@
+---
+title: "Volume21-50"
+author: "Yunyan Mo"
+date: "8/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message=FALSE, warning = FALSE)
+library(tidyverse)
+library(rvest)
+```
+
+
+```{r volume21}
+
+volume21 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634f8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163496&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163456&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016345f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163472&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634e4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163468&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634b5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634e4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163472&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016345f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163456&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163496&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801634f8&clang=_en"
+)
+
+
+vol21_data <- vector("list", length(volume21)) 
+
+for (i in seq_along(volume21)){
+  vol21_data[[i]] <- get_treaty(volume21[[i]])
+}
+
+for (i in seq_along(vol21_data)){
+ colnames(vol21_data[[i]])[colnames(vol21_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume21_combine <- bind_rows(vol21_data)
+
+
+write.csv(volume21_combine, "Volume-21.csv", row.names = FALSE)
+
+
+```
+
+
+```{r volume22}
+
+volume22 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163307&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632eb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632f6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016332d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163336&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163319&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632a0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632dd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016336a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163361&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163336&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016332d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632f6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632eb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163307&clang=_en"  
+)
+
+
+vol22_data <- vector("list", length(volume22)) 
+
+for (i in seq_along(volume22)){
+  vol22_data[[i]] <- get_treaty(volume22[[i]])
+}
+
+for (i in seq_along(vol22_data)){
+ colnames(vol22_data[[i]])[colnames(vol22_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume22_combine <- bind_rows(vol22_data)
+
+
+write.csv(volume22_combine, "Volume-22.csv", row.names = FALSE)
+```
+
+
+```{r volume23}
+
+volume23 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163282&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163277&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801631e1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632d2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632b4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632bf&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163247&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163250&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632c9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632ab&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801632d2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801631e1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163277&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163282&clang=_en"
+)
+
+
+vol23_data <- vector("list", length(volume23)) 
+
+for (i in seq_along(volume23)){
+  vol23_data[[i]] <- get_treaty(volume23[[i]])
+}
+
+for (i in seq_along(vol23_data)){
+ colnames(vol23_data[[i]])[colnames(vol23_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume23_combine <- bind_rows(vol23_data)
+
+
+write.csv(volume23_combine, "Volume-23.csv", row.names = FALSE)
+ 
+```
+
+
+```{r volume24}
+
+volume24 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163129&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163208&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016317d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163188&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163192&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016319d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163235&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163223&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801631f5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163134&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163134&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801631f5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163223&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163235&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016319d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163192&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163188&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016317d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163208&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163129&clang=_en"
+)
+
+vol24_data <- vector("list", length(volume24)) 
+
+for (i in seq_along(volume24)){
+  vol24_data[[i]] <- get_treaty(volume24[[i]])
+}
+
+for (i in seq_along(vol24_data)){
+ colnames(vol24_data[[i]])[colnames(vol24_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume24_combine <- bind_rows(vol24_data)
+
+
+write.csv(volume24_combine, "Volume-24.csv", row.names = FALSE)
+
+```
+
+
+```{r volume25}
+
+volume25 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016311f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163094&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016309e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801630a7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801630b0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801630b9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163089&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163100&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016314d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016313d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163100&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163089&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801630b9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801630b0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801630a7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016309e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163094&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016311f&clang=_en"
+)
+
+
+vol25_data <- vector("list", length(volume25)) 
+
+for (i in seq_along(volume25)){
+  vol25_data[[i]] <- get_treaty(volume25[[i]])
+}
+
+for (i in seq_along(vol25_data)){
+ colnames(vol25_data[[i]])[colnames(vol25_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume25_combine <- bind_rows(vol25_data)
+
+
+write.csv(volume25_combine, "Volume-25.csv", row.names = FALSE)
+```
+
+
+```{r volume26}
+
+volume26 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163057&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162fdf&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f7c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016304d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163073&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163069&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f5c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f91&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163041&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280048680&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162edd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016307e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016300f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162fcb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162fd5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280048680&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163041&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f91&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f5c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163069&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163073&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016304d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f7c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162fdf&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163057&clang=_en"
+)
+
+vol26_data <- vector("list", length(volume26)) 
+
+for (i in seq_along(volume26)){
+  vol26_data[[i]] <- get_treaty(volume26[[i]])
+}
+
+for (i in seq_along(vol26_data)){
+ colnames(vol26_data[[i]])[colnames(vol26_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume26_combine <- bind_rows(vol26_data)
+
+
+write.csv(volume26_combine, "Volume-26.csv", row.names = FALSE)
+```
+
+
+```{r volume27}
+
+volume27 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e80&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162dc0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162db6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e46&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162dcb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162deb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f3f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162eb8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f68&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d01&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e3d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f36&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e8b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e64&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162de1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162df6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e50&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e01&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d01&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f68&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162eb8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162f3f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162deb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162dcb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e46&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162db6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162dc0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e80&clang=_en"
+)
+
+vol27_data <- vector("list", length(volume27)) 
+
+for (i in seq_along(volume27)){
+  vol27_data[[i]] <- get_treaty(volume27[[i]])
+}
+
+for (i in seq_along(vol27_data)){
+ colnames(vol27_data[[i]])[colnames(vol27_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume27_combine <- bind_rows(vol27_data)
+
+
+write.csv(volume27_combine, "Volume-27.csv", row.names = FALSE)
+```
+
+
+```{r volume28}
+
+volume28 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d96&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162da1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e14&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e28&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d5e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e1e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d1e&clang=_en",    
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d4e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280166154&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d79&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d43&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d28&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e33&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d79&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280166154&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d4e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d1e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e1e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d5e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e28&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162e14&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162da1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162d96&clang=_en"
+)
+
+vol28_data <- vector("list", length(volume28)) 
+
+for (i in seq_along(volume28)){
+  vol28_data[[i]] <- get_treaty(volume28[[i]])
+}
+
+for (i in seq_along(vol28_data)){
+ colnames(vol28_data[[i]])[colnames(vol28_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume28_combine <- bind_rows(vol28_data)
+
+
+write.csv(volume28_combine, "Volume-28.csv", row.names = FALSE)
+
+
+```
+
+
+```{r volume29}
+
+volume29 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c1e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162be4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162cb8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162ce4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c31&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162cdb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162bf0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162bd1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c08&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c50&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162cee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162ba6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162bc5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162bba&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c50&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c08&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162bd1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162bf0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162cdb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c31&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162ce4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162cb8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162be4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162c1e&clang=_en"
+)
+
+
+vol29_data <- vector("list", length(volume29)) 
+
+for (i in seq_along(volume29)){
+  vol29_data[[i]] <- get_treaty(volume29[[i]])
+}
+
+for (i in seq_along(vol29_data)){
+ colnames(vol29_data[[i]])[colnames(vol29_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume29_combine <- bind_rows(vol29_data)
+
+
+write.csv(volume29_combine, "Volume-29.csv", row.names = FALSE)
+```
+
+
+```{r volume30}
+
+volume30 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162aac&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629b7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162aa2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162b9b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a4a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629e0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629a2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162ab6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a72&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a53&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629ad&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162956&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a53&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a72&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162ab6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629a2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629e0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a4a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162b9b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162aa2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801629b7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162aac&clang=_en"
+)
+
+vol30_data <- vector("list", length(volume30)) 
+
+for (i in seq_along(volume30)){
+  vol30_data[[i]] <- get_treaty(volume30[[i]])
+}
+
+for (i in seq_along(vol30_data)){
+ colnames(vol30_data[[i]])[colnames(vol30_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume30_combine <- bind_rows(vol30_data)
+
+
+write.csv(volume30_combine, "Volume-30.csv", row.names = FALSE)
+
+
+```
+
+
+```{r volume31}
+
+volume31 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016290c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801627f3&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162998&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628ac&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628a2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628b7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016291f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801627df&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a09&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016288e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628ea&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628de&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016288e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162a09&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801627df&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016291f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628b7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628a2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801628ac&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162998&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801627f3&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016290c&clang=_en"
+)
+
+vol31_data <- vector("list", length(volume31)) 
+
+for (i in seq_along(volume31)){
+  vol31_data[[i]] <- get_treaty(volume31[[i]])
+}
+
+for (i in seq_along(vol31_data)){
+ colnames(vol31_data[[i]])[colnames(vol31_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume31_combine <- bind_rows(vol31_data)
+
+
+write.csv(volume31_combine, "Volume-31.csv", row.names = FALSE)
+```
+
+
+```{r volume32}
+
+volume32 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162644&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625bb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162797&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625d0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280168541&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016856f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016277f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625e4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016264f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625c6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162616&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016261f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621a2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801627ac&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801627ca&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162669&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016264f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625e4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016277f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016856f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280168541&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625d0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162797&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801625bb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162644&clang=_en"
+)
+
+
+vol32_data <- vector("list", length(volume32)) 
+
+for (i in seq_along(volume32)){
+  vol32_data[[i]] <- get_treaty(volume32[[i]])
+}
+
+for (i in seq_along(vol32_data)){
+ colnames(vol32_data[[i]])[colnames(vol32_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume32_combine <- bind_rows(vol32_data)
+
+
+write.csv(volume32_combine, "Volume-32.csv", row.names = FALSE)
+
+```
+
+
+```{r volume33}
+
+volume33 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016252b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280168525&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162535&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162522&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162519&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002800507ae&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016253e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016257c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162586&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162505&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162522&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162535&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280168525&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016252b&clang=_en"
+)
+
+vol33_data <- vector("list", length(volume33)) 
+
+for (i in seq_along(volume33)){
+  vol33_data[[i]] <- get_treaty(volume33[[i]])
+}
+
+for (i in seq_along(vol33_data)){
+ colnames(vol33_data[[i]])[colnames(vol33_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume33_combine <- bind_rows(vol33_data)
+
+
+write.csv(volume33_combine, "Volume-33.csv", row.names = FALSE)
+```
+
+
+```{r volume34}
+
+volume34 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801624bf&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016247b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016249a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016237b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162467&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016241d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162471&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162454&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162386&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801622d1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801622c8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162401&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016244a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801624df&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801624b4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016851a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162371&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801623e6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162486&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801622d1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162386&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162454&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162471&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016241d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162467&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016237b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016249a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016247b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801624bf&clang=_en"
+)
+
+
+vol34_data <- vector("list", length(volume34)) 
+
+for (i in seq_along(volume34)){
+  vol34_data[[i]] <- get_treaty(volume34[[i]])
+}
+
+for (i in seq_along(vol34_data)){
+ colnames(vol34_data[[i]])[colnames(vol34_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume34_combine <- bind_rows(vol34_data)
+
+
+write.csv(volume34_combine, "Volume-34.csv", row.names = FALSE)
+```
+
+
+```{r volume35}
+
+volume35 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801623cf&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801622db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016239b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801623a6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016230b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162317&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162351&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162323&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801622f6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016233b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162351&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162317&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016230b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801623a6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016239b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801622db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801623cf&clang=_en"
+)
+
+vol35_data <- vector("list", length(volume35)) 
+
+for (i in seq_along(volume35)){
+  vol35_data[[i]] <- get_treaty(volume35[[i]])
+}
+
+for (i in seq_along(vol35_data)){
+ colnames(vol35_data[[i]])[colnames(vol35_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume35_combine <- bind_rows(vol35_data)
+
+
+write.csv(volume35_combine, "Volume-35.csv", row.names = FALSE)
+```
+
+
+```{r volume36}
+
+volume36 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016222e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801623c4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162239&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162219&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162224&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621f4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162210&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162256&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016224b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280162260&clang=_en"
+)
+
+vol36_data <- vector("list", length(volume36)) 
+
+for (i in seq_along(volume36)){
+  vol36_data[[i]] <- get_treaty(volume36[[i]])
+}
+
+for (i in seq_along(vol36_data)){
+ colnames(vol36_data[[i]])[colnames(vol36_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume36_combine <- bind_rows(vol36_data)
+
+
+write.csv(volume36_combine, "Volume-36.csv", row.names = FALSE)
+```
+
+
+```{r volume37}
+
+volume37 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028023cb1e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621d1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621b4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621c6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621e6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161cc9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028023cb6b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161cbf&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621ab&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621d1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028023cb1e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801621db&clang=_en"
+)
+
+vol37_data <- vector("list", length(volume37)) 
+
+for (i in seq_along(volume37)){
+  vol37_data[[i]] <- get_treaty(volume37[[i]])
+}
+
+for (i in seq_along(vol37_data)){
+ colnames(vol37_data[[i]])[colnames(vol37_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume37_combine <- bind_rows(vol37_data)
+
+
+write.csv(volume37_combine, "Volume-37.csv", row.names = FALSE)
+```
+
+
+```{r volume38}
+
+volume38 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c5e9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015cb32&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ce1d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d10e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d2d5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d4ef&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d61c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d86e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d9cd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015dd62&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e030&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e1de&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e0e1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e03b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d61c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015fccc&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015faee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801ccf04&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015f679&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015f360&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015f023&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ee8c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ebef&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015d9cd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015cb32&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ded0&clang=_en"
+)
+
+vol38_data <- vector("list", length(volume38)) 
+
+for (i in seq_along(volume38)){
+  vol38_data[[i]] <- get_treaty(volume38[[i]])
+}
+
+for (i in seq_along(vol38_data)){
+ colnames(vol38_data[[i]])[colnames(vol38_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume38_combine <- bind_rows(vol38_data)
+
+
+write.csv(volume38_combine, "Volume-38.csv", row.names = FALSE)
+```
+
+
+```{r volume39}
+
+volume39 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280210bac&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e69f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e9ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ebc0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801611d8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161666&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161721&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161933&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161a46&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161aa6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161933&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161721&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161666&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801611d8&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ebc0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e9ee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015e69f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280210bac&clang=_en"
+)
+
+vol39_data <- vector("list", length(volume39)) 
+
+for (i in seq_along(volume39)){
+  vol39_data[[i]] <- get_treaty(volume39[[i]])
+}
+
+for (i in seq_along(vol39_data)){
+ colnames(vol39_data[[i]])[colnames(vol39_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume39_combine <- bind_rows(vol39_data)
+
+
+write.csv(volume39_combine, "Volume-39.csv", row.names = FALSE)
+```
+
+
+```{r volume40}
+
+volume40 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160cf1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160dee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161069&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801610dd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801611cd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ffeb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160058&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801600bb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801601d9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160361&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801600bb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160058&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015ffeb&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801611cd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801610dd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280161069&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160dee&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280160cf1&clang=_en"
+)
+
+vol40_data <- vector("list", length(volume40)) 
+
+for (i in seq_along(volume40)){
+  vol40_data[[i]] <- get_treaty(volume40[[i]])
+}
+
+for (i in seq_along(vol40_data)){
+ colnames(vol40_data[[i]])[colnames(vol40_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume40_combine <- bind_rows(vol40_data)
+
+
+write.csv(volume40_combine, "Volume-40.csv", row.names = FALSE)
+
+```
+
+
+```{r volume41}
+
+volume41 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c5d6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c5df&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c5cd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4f1&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c541&clang=_en")
+
+vol41_data <- vector("list", length(volume41)) 
+
+for (i in seq_along(volume41)){
+  vol41_data[[i]] <- get_treaty(volume41[[i]])
+}
+
+for (i in seq_along(vol41_data)){
+ colnames(vol41_data[[i]])[colnames(vol41_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume41_combine <- bind_rows(vol41_data)
+
+
+write.csv(volume41_combine, "Volume-41.csv", row.names = FALSE)
+```
+
+
+```{r volume42}
+
+volume42 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4a2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4bd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4b4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4ab&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4d0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=08000002801684be&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c45b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c486&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4c6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c499&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4ab&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4b4&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4bd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c4a2&clang=_en"
+)
+
+vol42_data <- vector("list", length(volume42)) 
+
+for (i in seq_along(volume42)){
+  vol42_data[[i]] <- get_treaty(volume42[[i]])
+}
+
+for (i in seq_along(vol42_data)){
+ colnames(vol42_data[[i]])[colnames(vol42_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume42_combine <- bind_rows(vol42_data)
+
+
+write.csv(volume42_combine, "Volume-42.csv", row.names = FALSE)
+```
+
+
+```{r volume43}
+
+volume43 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c445&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c402&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163043&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c38c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c383&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280164afd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c3b0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c397&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c37a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c3a3&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c3a3&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c37a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c397&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c3b0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280164afd&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c383&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c38c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280163043&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c402&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c445&clang=_en"
+)
+
+
+vol43_data <- vector("list", length(volume43)) 
+
+for (i in seq_along(volume43)){
+  vol43_data[[i]] <- get_treaty(volume43[[i]])
+}
+
+for (i in seq_along(vol43_data)){
+ colnames(vol43_data[[i]])[colnames(vol43_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume43_combine <- bind_rows(vol43_data)
+
+
+write.csv(volume43_combine, "Volume-43.csv", row.names = FALSE)
+```
+
+
+```{r volume44}
+
+volume44 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2d0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2ae&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2ec&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2f6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c35c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c339&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c370&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c314&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c308&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c370&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c339&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c35c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2f6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2ec&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2ae&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c2d0&clang=_en"
+)
+
+
+vol44_data <- vector("list", length(volume44)) 
+
+for (i in seq_along(volume44)){
+  vol44_data[[i]] <- get_treaty(volume44[[i]])
+}
+
+for (i in seq_along(vol44_data)){
+ colnames(vol44_data[[i]])[colnames(vol44_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume44_combine <- bind_rows(vol44_data)
+
+
+write.csv(volume44_combine, "Volume-44.csv", row.names = FALSE)
+```
+
+
+```{r volume45}
+
+volume45 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c229&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c283&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c28d&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028002f354&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c27a&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c248&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c25b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c26f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c298&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c23e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c229&clang=_en"
+)
+
+vol45_data <- vector("list", length(volume45)) 
+
+for (i in seq_along(volume45)){
+  vol45_data[[i]] <- get_treaty(volume45[[i]])
+}
+
+for (i in seq_along(vol45_data)){
+ colnames(vol45_data[[i]])[colnames(vol45_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume45_combine <- bind_rows(vol45_data)
+
+
+write.csv(volume45_combine, "Volume-45.csv", row.names = FALSE)
+
+```
+
+
+```{r volume46}
+
+volume46 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c202&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c187&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c21f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c135&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c153&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c1b2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c192&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c1bc&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c20b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280045b5f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c1db&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c215&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c1f9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280045b5f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c20b&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c1bc&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c192&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c1b2&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c153&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c135&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c21f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c187&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c202&clang=_en"
+)
+
+
+vol46_data <- vector("list", length(volume46)) 
+
+for (i in seq_along(volume46)){
+  vol46_data[[i]] <- get_treaty(volume46[[i]])
+}
+
+for (i in seq_along(vol46_data)){
+ colnames(vol46_data[[i]])[colnames(vol46_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume46_combine <- bind_rows(vol46_data)
+
+
+write.csv(volume46_combine, "Volume-46.csv", row.names = FALSE)
+```
+
+
+```{r volume47}
+
+volume47 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c110&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c07e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c034&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c074&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c03f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c069&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c049&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c053&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c093&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c088&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280045e15&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280329eb0&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c05e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c088&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c093&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c053&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c049&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c069&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c03f&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c074&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c034&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c07e&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c110&clang=_en"
+)
+
+vol47_data <- vector("list", length(volume47)) 
+
+for (i in seq_along(volume47)){
+  vol47_data[[i]] <- get_treaty(volume47[[i]])
+}
+
+for (i in seq_along(vol47_data)){
+ colnames(vol47_data[[i]])[colnames(vol47_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume47_combine <- bind_rows(vol47_data)
+
+
+write.csv(volume47_combine, "Volume-47.csv", row.names = FALSE)
+```
+
+
+```{r volume48-50}
+
+volume48 <- c("https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c023&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280168475&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015bfff&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015bed7&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c012&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015bef6&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015bee3&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015beec&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015bff5&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015bfec&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028015c023&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028016846c&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028028c6f9&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=0800000280168444&clang=_en",
+"https://treaties.un.org/Pages/showDetails.aspx?objid=080000028028c6f9&clang=_en"
+)
+
+vol48_data <- vector("list", length(volume48)) 
+
+for (i in seq_along(volume48)){
+  vol48_data[[i]] <- get_treaty(volume48[[i]])
+}
+
+for (i in seq_along(vol48_data)){
+ colnames(vol48_data[[i]])[colnames(vol48_data[[i]]) %in% c("LNTS Volume Number")] <- c("UNTS Volume Number")
+}
+
+volume48_combine <- bind_rows(vol48_data)
+
+
+write.csv(volume48_combine, "Volume-48-to-50.csv", row.names = FALSE)
+```
+
